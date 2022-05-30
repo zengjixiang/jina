@@ -117,12 +117,16 @@ class TopologyGraph:
                         return request, metadata
                     # otherwise, send to executor and get response
                     try:
+                        print(f'gateway: sending request to {self.name} on {endpoint}')
                         resp, metadata = await connection_pool.send_requests_once(
                             requests=self.parts_to_send,
                             deployment=self.name,
                             head=True,
                             endpoint=endpoint,
                             timeout=self._timeout_send,
+                        )
+                        print(
+                            f'gateway: finished request from {self.name} on {endpoint}'
                         )
                     except InternalNetworkError as err:
                         self._handle_internalnetworkerror(err)
