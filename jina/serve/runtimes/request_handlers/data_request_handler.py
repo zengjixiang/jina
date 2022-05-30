@@ -120,6 +120,9 @@ class DataRequestHandler:
         :param requests: The messages to handle containing a DataRequest
         :returns: the processed message
         """
+        self.logger.info(
+            f'DataRequestHandler: handling request on executor {self._executor.metas.name}'
+        )
         # skip executor if endpoints mismatch
         if (
             requests[0].header.exec_endpoint not in self._executor.requests
@@ -127,6 +130,9 @@ class DataRequestHandler:
         ):
             self.logger.debug(
                 f'skip executor: mismatch request, exec_endpoint: {requests[0].header.exec_endpoint}, requests: {self._executor.requests}'
+            )
+            self.logger.info(
+                f'DataRequestHandler: finished request on executor {self._executor.metas.name}'
             )
             return requests[0]
 
@@ -184,6 +190,9 @@ class DataRequestHandler:
 
         DataRequestHandler.replace_docs(requests[0], docs, self.args.output_array_type)
 
+        self.logger.info(
+            f'DataRequestHandler: finished request on executor {self._executor.metas.name}'
+        )
         return requests[0]
 
     @staticmethod

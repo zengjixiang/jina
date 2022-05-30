@@ -147,13 +147,17 @@ class WorkerRuntime(AsyncNewLoopRuntime, ABC):
         :param context: grpc context
         :returns: the response request
         """
+        self.logger.info('WorkerRuntime: received request')
 
         with self._summary_time:
             try:
                 if self.logger.debug_enabled:
                     self._log_data_request(requests[0])
 
-                return await self._data_request_handler.handle(requests=requests)
+                res = await self._data_request_handler.handle(requests=requests)
+
+                self.logger('WorkerRuntime: returned request')
+                return res
             except (RuntimeError, Exception) as ex:
                 self.logger.error(
                     f'{ex!r}'
