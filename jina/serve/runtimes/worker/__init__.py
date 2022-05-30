@@ -156,7 +156,7 @@ class WorkerRuntime(AsyncNewLoopRuntime, ABC):
 
                 res = await self._data_request_handler.handle(requests=requests)
 
-                self.logger('WorkerRuntime: returned request')
+                self.logger.info('WorkerRuntime: returned request')
                 return res
             except (RuntimeError, Exception) as ex:
                 self.logger.error(
