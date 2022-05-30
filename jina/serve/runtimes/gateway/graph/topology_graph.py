@@ -1,6 +1,7 @@
 import asyncio
 import copy
 import re
+import traceback
 from collections import defaultdict
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
@@ -130,6 +131,9 @@ class TopologyGraph:
                         )
                     except InternalNetworkError as err:
                         self._handle_internalnetworkerror(err)
+                    except Exception as e:
+                        print(e)
+                        print(traceback.format_exc())
 
                     self.end_time = datetime.utcnow()
                     if metadata and 'is-error' in metadata:
