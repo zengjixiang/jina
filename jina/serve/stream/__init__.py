@@ -56,6 +56,7 @@ class RequestStreamer:
         self._request_handler = request_handler
         self._result_handler = result_handler
         self._end_of_iter_handler = end_of_iter_handler
+        self.cnt = 0
 
     async def stream(
         self, request_iterator, context=None, *args
@@ -139,6 +140,8 @@ class RequestStreamer:
             """
             async for request in AsyncRequestsIterator(iterator=request_iterator):
                 requests_to_handle.count += 1
+                self.cnt += 1
+                self.logger.info(f'RequestStreamer: cnt: {self.cnt}')
                 future: 'asyncio.Future' = self._request_handler(request=request)
                 future.add_done_callback(callback)
             if self._end_of_iter_handler is not None:
