@@ -68,6 +68,7 @@ class RequestStreamer:
         :param args: positional arguments
         :yield: responses from Executors
         """
+        self.logger.info('RequestStreamer: received request')
 
         async_iter: AsyncIterator = (
             self._stream_requests_with_prefetch(request_iterator, self._prefetch)
@@ -77,6 +78,8 @@ class RequestStreamer:
         try:
             async for response in async_iter:
                 yield response
+
+            self.logger.info('RequestStreamer: finished request')
         except InternalNetworkError as err:
             if (
                 context is not None
