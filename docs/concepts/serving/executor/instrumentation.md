@@ -87,14 +87,14 @@ If tracing is not enabled by default or enabled in your environment, check `self
 Prometheus-only based metrics collection will be deprecated soon. Refer to {ref}`Monitoring Executor <monitoring>` section for the deprecated setup.
 ```
 
-Any method that uses the {class}`~jina-serve.requests` decorator is monitored and creates a
+Any method that uses the {class}`~jina.requests` decorator is monitored and creates a
 [histogram](https://opentelemetry.io/docs/reference/specification/metrics/data-model/#histogram) which tracks the method's execution time.
 
-This section documents adding custom monitoring to the {class}`~jina-serve.Executor` with the OpenTelemetry Metrics API.
+This section documents adding custom monitoring to the {class}`~jina.Executor` with the OpenTelemetry Metrics API.
 
 Custom metrics are useful to monitor each sub-part of your Executor(s). Jina lets you leverage
 the [Meter](https://opentelemetry.io/docs/reference/specification/metrics/api/#meter) to define useful metrics 
-for each of your Executors. We also provide a convenient wrapper, ({func}`~jina-serve.monitor`), which lets you monitor
+for each of your Executors. We also provide a convenient wrapper, ({func}`~jina.monitor`), which lets you monitor
 your Executor's sub-methods. 
 
 When metrics are enabled, each Executor exposes its 
@@ -134,7 +134,7 @@ class MyExecutor(Executor):
 
 #### Use the `@monitor` decorator
 
-Add custom monitoring to a method with the {func}`~jina-serve.monitor` decorator:
+Add custom monitoring to a method with the {func}`~jina.monitor` decorator:
 
 ```python
 from jina import Executor, monitor
@@ -148,7 +148,7 @@ class MyExecutor(Executor):
 
 This creates a [Histogram](https://opentelemetry.io/docs/reference/specification/metrics/data-model/#histogram) `jina_my_method_seconds` which tracks the execution time of `my_method`
 
-By default, the name and documentation of the metric created by {func}`~jina-serve.monitor` are auto-generated based on the function's name. 
+By default, the name and documentation of the metric created by {func}`~jina.monitor` are auto-generated based on the function's name. 
 To set a custom name:
 
 ```python
@@ -166,7 +166,7 @@ You should respect OpenTelemetry Metrics [semantic conventions](https://opentele
 
 #### Use OpenTelemetry Meter
 
-Under the hood, Python [OpenTelemetry Metrics API](https://opentelemetry.io/docs/concepts/signals/metrics/) handles the Executor's metrics feature. The {func}`~jina-serve.monitor` decorator is convenient for monitoring an Executor's sub-methods, but if you need more flexibility, use the `self.meter` Executor class attribute to create supported instruments:
+Under the hood, Python [OpenTelemetry Metrics API](https://opentelemetry.io/docs/concepts/signals/metrics/) handles the Executor's metrics feature. The {func}`~jina.monitor` decorator is convenient for monitoring an Executor's sub-methods, but if you need more flexibility, use the `self.meter` Executor class attribute to create supported instruments:
 
 
 ```python

@@ -193,7 +193,7 @@ In a notebook, you can't use `deployment.block()` and then make requests with th
 
 ## Client: Send and receive requests to your service
 
-Use {class}`~jina-serve.Client` to make requests to the service. As before, we use Documents as our basic IO format. We'll use the text prompt `rainbow unicorn butterfly kitten`:
+Use {class}`~jina.Client` to make requests to the service. As before, we use Documents as our basic IO format. We'll use the text prompt `rainbow unicorn butterfly kitten`:
 
 ```python
 from jina import Client

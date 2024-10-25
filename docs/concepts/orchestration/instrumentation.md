@@ -70,20 +70,20 @@ Because not all Pods have the same role, they expose different kinds of traces:
 
 | Operation name    | Description  |
 |-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `/jina-serve.JinaRPC/Call` | Traces the request from the client to the Gateway server. |
-| `/jina-serve.JinaSingleDataRequestRPC/process_single_data` | Internal operation for the request originating from the Gateway to the target Head or Executor. |
+| `/jina.JinaRPC/Call` | Traces the request from the client to the Gateway server. |
+| `/jina.JinaSingleDataRequestRPC/process_single_data` | Internal operation for the request originating from the Gateway to the target Head or Executor. |
 
 #### Head Pods
 
 | Operation name    | Description  |
 |-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `/jina-serve.JinaSingleDataRequestRPC/process_single_data` | Internal operation for the request originating from the Gateway to the target Head. Another child span is created for the request originating from the Head to the Executor.|
+| `/jina.JinaSingleDataRequestRPC/process_single_data` | Internal operation for the request originating from the Gateway to the target Head. Another child span is created for the request originating from the Head to the Executor.|
 
 #### Executor Pods
 
 | Operation name    | Description  |
 |-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `/jina-serve.JinaSingleDataRequestRPC/process_single_data` | Executor server operation for the request originating from the Gateway/Head to the Executor request handler. |
+| `/jina.JinaSingleDataRequestRPC/process_single_data` | Executor server operation for the request originating from the Gateway/Head to the Executor request handler. |
 | `/endpoint` | Internal operation for the request originating from the Executor request handler to the target `@requests(=/endpoint)` method. The `endpoint` will be `default` if no endpoint name is provided. |
 
 ```{seealso} 

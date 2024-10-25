@@ -166,14 +166,14 @@ dep.save_config('deployment.yml')
 
 ## Start and stop
 
-When a {class}`~jina-serve.Deployment` starts, all the replicated Executors will start as well, making it possible to {ref}`reach the service through its API <third-party-client>`.
+When a {class}`~jina.Deployment` starts, all the replicated Executors will start as well, making it possible to {ref}`reach the service through its API <third-party-client>`.
 
 There are three ways to start a Deployment: In Python, from a YAML file, or from the terminal.
 
 - Generally in Python: use Deployment as a context manager.
 - As an entrypoint from terminal: use `Jina CLI <cli>` and a Deployment YAML file.
 - As an entrypoint from Python code: use Deployment as a context manager inside `if __name__ == '__main__'`
-- No context manager, manually call {meth}`~jina-serve.Deployment.start` and {meth}`~jina-serve.Deployment.close`.
+- No context manager, manually call {meth}`~jina.Deployment.start` and {meth}`~jina.Deployment.close`.
 
 ````{tab} General in Python
 ```python

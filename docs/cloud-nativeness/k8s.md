@@ -47,7 +47,7 @@ The export function {meth}`~jina.Deployment.to_kubernetes_yaml` and {meth}`~jina
 ```
 ````{admonition} Matching Jina versions
 :class: caution
-If you change the Docker images for {class}`~jina-serve.Executor` and {class}`~jina-serve.Gateway` in your Kubernetes-generated file, ensure that all of them are built with the same Jina-serve version to guarantee compatibility.
+If you change the Docker images for {class}`~jina.Executor` and {class}`~jina.Gateway` in your Kubernetes-generated file, ensure that all of them are built with the same Jina-serve version to guarantee compatibility.
 ````
 
 You can't add basic Kubernetes features like `Secrets`, `ConfigMap` or `Labels` via the Pythonic or YAML interface. This is intentional and doesn't mean that we don't support these features. On the contrary, we let you fully express your Kubernetes configuration by using the Kubernetes API to add your own Kubernetes standard to Jina-serve.
@@ -129,7 +129,7 @@ This can be done in a Pythonic way or in YAML:
 
 ````{tab} Using Python
 
-You can use {meth}`~jina-serve.Flow.config_gateway` to add `replicas` parameter
+You can use {meth}`~jina.Flow.config_gateway` to add `replicas` parameter
 ```python
 from jina import Flow
 
@@ -161,6 +161,6 @@ You can use a custom Docker image for the Gateway deployment by setting the envi
 ## See also
 - {ref}`Step by step deployment of a Jina-serve Flow on Kubernetes <kubernetes>`
 - {ref}`Export a Flow to Kubernetes <kubernetes-export>`
-- {meth}`~jina-serve.Flow.to_kubernetes_yaml`
+- {meth}`~jina.Flow.to_kubernetes_yaml`
 - {ref}`Deploy a standalone Executor on Kubernetes <kubernetes-executor>`
 - [Kubernetes Documentation](https://kubernetes.io/docs/home/)

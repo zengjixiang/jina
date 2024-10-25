@@ -220,7 +220,7 @@ with any Client.
 
 ## Enable in-Flow compression
 
-The communication between {class}`~jina-serve.Executor`s inside a {class}`~jina-serve.Flow` is done via gRPC. To optimize the
+The communication between {class}`~jina.Executor`s inside a {class}`~jina.Flow` is done via gRPC. To optimize the
 performance and the bandwidth of these connections, you can
 enable [compression](https://grpc.github.io/grpc/python/grpc.html#compression) by specifying `compression` argument to
 the Gateway.
@@ -320,7 +320,7 @@ You can also use it to check Executor status, as Executor's communication protoc
 (gateway-grpc-server-options)=
 ### Configure Gateway gRPC options
 
-The {class}`~jina-serve.Gateway` supports the `grpc_server_options` parameter which allows more customization of the **gRPC**
+The {class}`~jina.Gateway` supports the `grpc_server_options` parameter which allows more customization of the **gRPC**
 server. The `grpc_server_options` parameter accepts a dictionary of **gRPC** configuration options which will be
 used to overwrite the default options. The **gRPC** channel used for server to server communication can also be
 customized using the `grpc_channel_options` parameter.
