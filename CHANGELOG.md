@@ -290,6 +290,7 @@
 
 
 
+
 # Change Logs
 
 Jina is released on every Friday evening. The PyPi package and Docker Image will be updated, the changes of the release will be tracked by this file.
@@ -17100,4 +17101,27 @@ Jina is released on every Friday evening. The PyPi package and Docker Image will
 
  - [[```ebbc2519```](https://github.com/jina-ai/jina/commit/ebbc25197e58116226126fc731ff394c73d5a2c4)] __-__ __docs__: update TOC (*Jina Dev Bot*)
  - [[```1517fc7c```](https://github.com/jina-ai/jina/commit/1517fc7c93c75a428ce351add2dc886e51d90e53)] __-__ __version__: the next version will be 3.27.17 (*Jina Dev Bot*)
+
+<a name=release-note-3-27-18></a>
+## Release Note (`3.27.18`)
+
+> Release time: 2024-10-25 16:57:06
+
+
+
+🙇 We'd like to thank all contributors for this new release! In particular,
+ Han Xiao,  Jina Dev Bot,  🙇
+
+
+### 📗 Documentation
+
+ - [[```d65d0c30```](https://github.com/jina-ai/jina/commit/d65d0c30e5732d14477938a018f46d33463e3d51)] __-__ fix url (*Han Xiao*)
+ - [[```99f4384a```](https://github.com/jina-ai/jina/commit/99f4384a13595cd4c687e0ff062e75e43798f05b)] __-__ fix typo (*Han Xiao*)
+
+### 🍹 Other Improvements
+
+ - [[```ce97c322```](https://github.com/jina-ai/jina/commit/ce97c322aaeca958e106458d0837927413a983b5)] __-__ replace docarray v1v2 to version number (*Han Xiao*)
+ - [[```984da92d```](https://github.com/jina-ai/jina/commit/984da92d126471a107e82fb0d77950696420be10)] __-__ update readme (*Han Xiao*)
+ - [[```32f0cb30```](https://github.com/jina-ai/jina/commit/32f0cb30dbd019cb60f24754befdfb30d2410e4a)] __-__ __docs__: update TOC (*Jina Dev Bot*)
+ - [[```1e3dd5f2```](https://github.com/jina-ai/jina/commit/1e3dd5f29b6c88548cd44a1be51d3226523cf81a)] __-__ __version__: the next version will be 3.27.18 (*Jina Dev Bot*)
 
