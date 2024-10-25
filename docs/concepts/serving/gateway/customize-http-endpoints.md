@@ -130,12 +130,12 @@ f = Flow().config_gateway(cors=True, protocol='http')
 :class: caution
 
 GraphQL support is an optional feature that requires optional dependencies.
-To install these, run `pip install jina[graphql]` or `pip install jina[all]`.
+To install these, run `pip install jina-serve[graphql]` or `pip install jina-serve[all]`.
 
 Unfortunately, these dependencies are **not available through Conda**. You will have to use `pip` to be able to use GraphQL feature.
 ````
 
-A {class}`~jina.Flow` can optionally expose a [GraphQL](https://graphql.org/) endpoint, located at `/graphql`.
+A {class}`~jina-serve.Flow` can optionally expose a [GraphQL](https://graphql.org/) endpoint, located at `/graphql`.
 To enable this endpoint, all you need to do is set `expose_graphql_endpoint=True` on your HTTP Flow:
 
 

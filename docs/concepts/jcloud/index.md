@@ -18,7 +18,7 @@ configuration
 :width: 0 %
 ```
 
-After building a Jina project, the next step is to deploy and host it on the cloud. [Jina AI Cloud](https://cloud.jina.ai/) is Jina's reliable, scalable and production-ready cloud-hosting solution that manages your project lifecycle without surprises or hidden development costs.
+After building a Jina-serve project, the next step is to deploy and host it on the cloud. [Jina AI Cloud](https://cloud.jina.ai/) is Jina-serve's reliable, scalable and production-ready cloud-hosting solution that manages your project lifecycle without surprises or hidden development costs.
 
 ```{tip}
 Are you ready to unlock the power of AI with Jina AI Cloud? Take a look at our [pricing options](https://cloud.jina.ai/pricing) now!
@@ -31,7 +31,7 @@ In addition to deploying Flows, `jcloud` supports the creation of secrets and jo
 Jina AI Cloud provides a CLI that you can use via `jina cloud` from the terminal (or `jcloud` or simply `jc` for minimalists.)
 
 ````{hint}
-You can also install just the JCloud CLI without installing the Jina package.
+You can also install just the JCloud CLI without installing the Jina-serve package.
 
 ```bash
 pip install jcloud

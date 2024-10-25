@@ -98,7 +98,7 @@ Hence, `deployment.post()` and `flow.post()` are not recommended outside of test
 (request-size-client)=
 ## Send data in batches
 
-Especially during indexing, a Client can send up to thousands or millions of Documents to a {class}`~jina.Flow`.
+Especially during indexing, a Client can send up to thousands or millions of Documents to a {class}`~jina-serve.Flow`.
 Those Documents are internally batched into a `Request`, providing a smaller memory footprint and faster response times
 thanks
 to {ref}`callback functions <callback-functions>`.
@@ -117,8 +117,8 @@ with Deployment() as dep:
 
 ## Send data asynchronously
 
-There is an async version of the Python Client which works with {meth}`~jina.clients.mixin.PostMixin.post` and
-{meth}`~jina.clients.mixin.MutateMixin.mutate`.
+There is an async version of the Python Client which works with {meth}`~jina-serve.clients.mixin.PostMixin.post` and
+{meth}`~jina-serve.clients.mixin.MutateMixin.mutate`.
 
 While the standard `Client` is also asynchronous under the hood, its async version exposes this fact to the outside
 world,
@@ -165,8 +165,8 @@ class DummyExecutor(Executor):
 
 ## Send data to specific Executors
 
-Usually a {class}`~jina.Flow` will send each request to all {class}`~jina.Executor`s with matching endpoints as
-configured. But the {class}`~jina.Client` also allows you to only target specific Executors in a Flow using
+Usually a {class}`~jina-serve.Flow` will send each request to all {class}`~jina-serve.Executor`s with matching endpoints as
+configured. But the {class}`~jina-serve.Client` also allows you to only target specific Executors in a Flow using
 the `target_executor` keyword. The request will then only be processed by the Executors which match the provided
 target_executor regex. Its usage is shown in the listing below.
 
@@ -209,7 +209,7 @@ Executor.
 
 The Flow with **gRPC** protocol implements the unary and the streaming RPC lifecycle for communicating with the clients.
 When sending more than one request using the batching or the iterator mechanism, the RPC lifecycle for the
-{meth}`~jina.clients.mixin.PostMixin.post` method can be controlled using the `stream` boolean method argument. By
+{meth}`~jina-serve.clients.mixin.PostMixin.post` method can be controlled using the `stream` boolean method argument. By
 default the stream option is set to `True` which uses the streaming RPC to send the data to the Flow. If the stream
 option is set to `False`, the unary RPC is used to send the data to the Flow.
 Both RPC lifecycles are implemented to provide the flexibility for the clients.
@@ -247,7 +247,7 @@ used to overwrite the default options. The default **gRPC** options are:
 # allow grpc pings from client without data every 4 seconds
 ```
 
-If the `max_attempts` is greater than 1 on the {meth}`~jina.clients.mixin.PostMixin.post` method,
+If the `max_attempts` is greater than 1 on the {meth}`~jina-serve.clients.mixin.PostMixin.post` method,
 the `grpc.service_config` option will not be applied since the retry
 options will be configured internally.
 
@@ -261,9 +261,9 @@ Refer to the {ref}`Configure Executor gRPC options <executor-grpc-server-options
 
 ## Returns
 
-{meth}`~jina.clients.mixin.PostMixin.post` returns a `DocList` containing all Documents flattened over all
+{meth}`~jina-serve.clients.mixin.PostMixin.post` returns a `DocList` containing all Documents flattened over all
 Requests. When setting `return_responses=True`, this behavior is changed to returning a list of
-{class}`~jina.types.request.data.Response` objects.
+{class}`~jina-serve.types.request.data.Response` objects.
 
 If a callback function is provided, `client.post()` will return none.
 
@@ -331,7 +331,7 @@ None
 
 ### Return type
 
-{meth}`~jina.clients.mixin.PostMixin.post` returns the Documents as the server sends them back. In order for the client to 
+{meth}`~jina-serve.clients.mixin.PostMixin.post` returns the Documents as the server sends them back. In order for the client to 
 return the user's expected document type, the `return_type` argument is required.
 
 The `return_type` can be a parametrized `DocList` or a single `BaseDoc` type. If the return type parameter is a `BaseDoc` type,
@@ -355,7 +355,7 @@ requests may not be the same order as the Client sending them. Hence, the respon
 the sending order.
 
 To force the order of the results to be deterministic and the same as when they are sent, passing `results_in_order`
-parameter to {meth}`~jina.clients.mixin.PostMixin.post`.
+parameter to {meth}`~jina-serve.clients.mixin.PostMixin.post`.
 
 ```python
 import random

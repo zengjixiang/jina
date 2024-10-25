@@ -159,14 +159,14 @@ Exceptions raised inside the `with f:` block will close the Flow context manager
 
 ## Start and stop
 
-When a {class}`~jina.Flow` starts, all included Executors (single for a Deployment, multiple for a Flow) will start as well, making it possible to {ref}`reach the service through its API <third-party-client>`.
+When a {class}`~jina-serve.Flow` starts, all included Executors (single for a Deployment, multiple for a Flow) will start as well, making it possible to {ref}`reach the service through its API <third-party-client>`.
 
 There are three ways to start an Flow: In Python, from a YAML file, or from the terminal.
 
 - Generally in Python: use Deployment or Flow as a context manager in Python.
 - As an entrypoint from terminal: use `Jina CLI <cli>` and a Flow YAML file.
 - As an entrypoint from Python code: use Flow as a context manager inside `if __name__ == '__main__'`
-- No context manager: manually call {meth}`~jina.Flow.start` and {meth}`~jina.Flow.close`.
+- No context manager: manually call {meth}`~jina-serve.Flow.start` and {meth}`~jina-serve.Flow.close`.
 
 ````{tab} General in Python
 ```python
@@ -179,7 +179,7 @@ with f:
 ```
 ````
 
-````{tab} Jina CLI entrypoint
+````{tab} Jina-serve CLI entrypoint
 ```bash
 jina flow --uses flow.yml
 ```
@@ -353,12 +353,12 @@ The generated folder can be used directly with `kubectl` to deploy the Flow to a
 For advanced utilisation of Kubernetes with Jina please refer to {ref}`How to <kubernetes>` 
 
 ```{tip}
-Based on your local Jina version, Executor Hub may rebuild the Docker image during the YAML generation process.
+Based on your local Jina-serve version, Executor Hub may rebuild the Docker image during the YAML generation process.
 If you do not wish to rebuild the image, set the environment variable `JINA_HUB_NO_IMAGE_REBUILD`.
 ```
 
 ```{tip}
-If an Executor requires volumes to be mapped to persist data, Jina will create a StatefulSet for that Executor instead of a Deployment.
+If an Executor requires volumes to be mapped to persist data, Jina-serve will create a StatefulSet for that Executor instead of a Deployment.
 You can control the access mode, storage class name and capacity of the attached Persistent Volume Claim by using {ref}`Jina environment variables <jina-env-vars>`  
 `JINA_K8S_ACCESS_MODES`, `JINA_K8S_STORAGE_CLASS_NAME` and `JINA_K8S_STORAGE_CAPACITY`. Only the first volume will be considered to be mounted.
 ```
@@ -381,11 +381,11 @@ to the services around because in Kubernetes services communicate via the servic
 This section is for Flow-specific considerations when working with Executors. Check more information on {ref}`working with Executors <add-executors>`.
 ```
 
-A {class}`~jina.Flow` orchestrates its {class}`~jina.Executor`s as a graph and sends requests to all Executors in the order specified by {meth}`~jina.Flow.add` or listed in {ref}`a YAML file<flow-yaml-spec>`. 
+A {class}`~jina-serve.Flow` orchestrates its {class}`~jina-serve.Executor`s as a graph and sends requests to all Executors in the order specified by {meth}`~jina-serve.Flow.add` or listed in {ref}`a YAML file<flow-yaml-spec>`. 
 
 When you start a Flow, Executors always run in **separate processes**. Multiple Executors run in **different processes**. Multiprocessing is the lowest level of separation when you run a Flow locally. When running a Flow on Kubernetes, Docker Swarm, {ref}`jcloud`, different Executors run in different containers, pods or instances.   
 
-Executors can be added into a Flow with {meth}`~jina.Flow.add`.  
+Executors can be added into a Flow with {meth}`~jina-serve.Flow.add`.  
 
 ```python
 from jina import Flow
@@ -393,7 +393,7 @@ from jina import Flow
 f = Flow().add()
 ```
 
-This adds an "empty" Executor called {class}`~jina.serve.executors.BaseExecutor` to the Flow. This Executor (without any parameters) performs no actions.
+This adds an "empty" Executor called {class}`~jina-serve.serve.executors.BaseExecutor` to the Flow. This Executor (without any parameters) performs no actions.
 
 ```{figure} images/no-op-flow.svg
 :scale: 70%
@@ -434,7 +434,7 @@ More Flow YAML specifications can be found in {ref}`Flow YAML Specification<flow
 Let's understand how Executors process Documents's inside a Flow, and how changes are chained and applied, affecting downstream Executors in the Flow.
 
 ```python 
-from jina import Executor, requests, Flow
+from jina-serve import Executor, requests, Flow
 from docarray import DocList, BaseDoc
 from docarray.documents import TextDoc
 
@@ -492,11 +492,11 @@ with f:
 
 ### Define topologies over Executors
 
-{class}`~jina.Flow`s are not restricted to sequential execution. Internally they are modeled as graphs, so they can represent any complex, non-cyclic topology.
+{class}`~jina-serve.Flow`s are not restricted to sequential execution. Internally they are modeled as graphs, so they can represent any complex, non-cyclic topology.
 
 A typical use case for such a Flow is a topology with a common pre-processing part, but different indexers separating embeddings and data.
 
-To define a custom topology you can use the `needs` keyword when adding an {class}`~jina.Executor`. By default, a Flow assumes that every Executor needs the previously added Executor.
+To define a custom topology you can use the `needs` keyword when adding an {class}`~jina-serve.Executor`. By default, a Flow assumes that every Executor needs the previously added Executor.
 
 ```python
 from jina import Executor, requests, Flow
@@ -757,11 +757,11 @@ f.plot()
 
 Sometimes you may not want all Documents to be processed by all Executors. For example when you process text and image Documents you want to forward them to different Executors depending on their data type. 
 
-You can set conditioning for every {class}`~jina.Executor` in the Flow. Documents that don't meet the condition will be removed before reaching that Executor. This allows you to build a selection control in the Flow.
+You can set conditioning for every {class}`~jina-serve.Executor` in the Flow. Documents that don't meet the condition will be removed before reaching that Executor. This allows you to build a selection control in the Flow.
 
 #### Define conditions
 
-To add a condition to an Executor, pass it to the `when` parameter of {meth}`~jina.Flow.add` method of the Flow. This then defines *when* a Document is processed by the Executor:
+To add a condition to an Executor, pass it to the `when` parameter of {meth}`~jina-serve.Flow.add` method of the Flow. This then defines *when* a Document is processed by the Executor:
 
 You can use the [MongoDB query language](https://www.mongodb.com/docs/compass/current/query/filter/#query-your-data) used in [docarray](https://docs.docarray.org/API_reference/utils/filter/) which follows  to specify a filter condition for each Executor.
 
@@ -1113,7 +1113,7 @@ Resulting documents Document merging from "Exec1" and "Exec2"
 
 ## Visualize
 
-A {class}`~jina.Flow` has a built-in `.plot()` function which can be used to visualize the `Flow`:
+A {class}`~jina-serve.Flow` has a built-in `.plot()` function which can be used to visualize the `Flow`:
 ```python
 from jina import Flow
 
@@ -1213,14 +1213,14 @@ The most important methods of the `Flow` object are the following:
 
 | Method                                                       | Description                                                                                                                                                                                                                                                                          |
 |--------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| {meth}`~jina.Flow.add`                                       | Adds an Executor to the Flow                                                                                                                                                                                                                                                         |
-| {meth}`~jina.Flow.start()`                                   | Starts the Flow. This will start all its Executors and check if they are ready to be used.                                                                                                                                                                                           |
-| {meth}`~jina.Flow.close()`                                   | Stops and closes the Flow. This will stop and shutdown all its Executors.                                                                                                                                                                                                            |
+| {meth}`~jina-serve.Flow.add`                                       | Adds an Executor to the Flow                                                                                                                                                                                                                                                         |
+| {meth}`~jina-serve.Flow.start()`                                   | Starts the Flow. This will start all its Executors and check if they are ready to be used.                                                                                                                                                                                           |
+| {meth}`~jina-serve.Flow.close()`                                   | Stops and closes the Flow. This will stop and shutdown all its Executors.                                                                                                                                                                                                            |
 | `with` context manager                                       | Uses the Flow as a context manager. It will automatically start and stop your Flow.                                                                                                                                                                                                   |                                                                |
-| {meth}`~jina.Flow.plot()`                                    | Visualizes the Flow. Helpful for building complex pipelines.                                                                                                                                                                                                                         |
-| {meth}`~jina.clients.mixin.PostMixin.post()`                 | Sends requests to the Flow API.                                                                                                                                                                                                                                                      |
-| {meth}`~jina.Flow.block()`                                   | Blocks execution until the program is terminated. This is useful to keep the Flow alive so it can be used from other places (clients, etc).                                                                                                                                          |
-| {meth}`~jina.Flow.to_docker_compose_yaml()`                  | Generates a Docker-Compose file listing all Executors as services.                                                                                                                                                                                                                                                |
-| {meth}`~jina.Flow.to_kubernetes_yaml()`                      | Generates Kubernetes configuration files in `<output_directory>`. Based on your local Jina and docarray versions, Executor Hub may rebuild the Docker image during the YAML generation process. If you do not wish to rebuild the image, set the environment variable `JINA_HUB_NO_IMAGE_REBUILD`.                                                                                                                                   |
-| {meth}`~jina.clients.mixin.HealthCheckMixin.is_flow_ready()` | Check if the Flow is ready to process requests. Returns a boolean indicating the readiness.                                                                                                                                                                                                                                                                                                                                 |
+| {meth}`~jina-serve.Flow.plot()`                                    | Visualizes the Flow. Helpful for building complex pipelines.                                                                                                                                                                                                                         |
+| {meth}`~jina-serve.clients.mixin.PostMixin.post()`                 | Sends requests to the Flow API.                                                                                                                                                                                                                                                      |
+| {meth}`~jina-serve.Flow.block()`                                   | Blocks execution until the program is terminated. This is useful to keep the Flow alive so it can be used from other places (clients, etc).                                                                                                                                          |
+| {meth}`~jina-serve.Flow.to_docker_compose_yaml()`                  | Generates a Docker-Compose file listing all Executors as services.                                                                                                                                                                                                                                                |
+| {meth}`~jina-serve.Flow.to_kubernetes_yaml()`                      | Generates Kubernetes configuration files in `<output_directory>`. Based on your local Jina and docarray versions, Executor Hub may rebuild the Docker image during the YAML generation process. If you do not wish to rebuild the image, set the environment variable `JINA_HUB_NO_IMAGE_REBUILD`.                                                                                                                                   |
+| {meth}`~jina-serve.clients.mixin.HealthCheckMixin.is_flow_ready()` | Check if the Flow is ready to process requests. Returns a boolean indicating the readiness.                                                                                                                                                                                                                                                                                                                                 |
 

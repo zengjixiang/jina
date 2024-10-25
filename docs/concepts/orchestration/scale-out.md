@@ -278,7 +278,7 @@ This increases QPS from 2.5 to 5.
 
 ## Replicate on multiple GPUs
 
-To replicate your {class}`~jina.Executor`s so that each replica uses a different GPU on your machine, you can tell the Orchestration to use multiple GPUs by passing `CUDA_VISIBLE_DEVICES=RR` as an environment variable.
+To replicate your {class}`~jina-serve.Executor`s so that each replica uses a different GPU on your machine, you can tell the Orchestration to use multiple GPUs by passing `CUDA_VISIBLE_DEVICES=RR` as an environment variable.
 
 ```{caution} 
 You should only replicate on multiple GPUs with `CUDA_VISIBLE_DEVICES=RR` locally.  

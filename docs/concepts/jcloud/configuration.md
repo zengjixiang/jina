@@ -1,7 +1,7 @@
 (jcloud-configuration)=
 # {octicon}`file-code` Configuration
 
-JCloud extends Jina's {ref}`Flow YAML specification<flow-yaml-spec>` by introducing the special field `jcloud`. This lets you define resources and scaling policies for each Executor and Gateway.
+JCloud extends Jina-serve's {ref}`Flow YAML specification<flow-yaml-spec>` by introducing the special field `jcloud`. This lets you define resources and scaling policies for each Executor and Gateway.
 
 Here's a Flow with two Executors that have specific resource needs: `indexer` requires a 10 GB `ebs` disk, whereas `encoder` requires a G4 instance, which implies that two cores and 4 GB RAM are used. See the below sections for further information about instance types.
 

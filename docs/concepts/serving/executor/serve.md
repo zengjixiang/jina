@@ -19,7 +19,7 @@ to achieve this with the {ref}`Flow <flow-cookbook>`
 
 In Jina there are two ways of running standalone Executors: *Served Executors* and *shared Executors*.
 
-- A **served Executor** is launched by one of the following methods: {class}`~jina.orchestrate.deployments.Deployment`, `to_kubernetes_yaml()`, or `to_docker_compose_yaml()`.
+- A **served Executor** is launched by one of the following methods: {class}`~jina-serve.orchestrate.deployments.Deployment`, `to_kubernetes_yaml()`, or `to_docker_compose_yaml()`.
 It resides behind a {ref}`Gateway <architecture-overview>` and can be directly accessed by a {ref}`Client <client>`.
 It can also be used as part of a Flow.
 
@@ -33,9 +33,9 @@ In any case, the user needs to make sure that the Document types bound to each e
 
 (deployment)=
 ## Serve directly
-An {class}`~jina.Executor` can be served using the {class}`~jina.orchestrate.deployments.Deployment` class.
+An {class}`~jina-serve.Executor` can be served using the {class}`~jina-serve.orchestrate.deployments.Deployment` class.
 
-The {class}`~jina.orchestrate.deployments.Deployment` class aims to separate the deployment configuration from the serving logic.
+The {class}`~jina-serve.orchestrate.deployments.Deployment` class aims to separate the deployment configuration from the serving logic.
 In other words:
 * the Executor cares about defining the logic to serve, which endpoints to define and what data to accept.
 * the Deployment layer cares about how to orchestrate this service, how many replicas or shards, etc.
@@ -144,7 +144,7 @@ py_modules:
   - executor.py
 ```
 
-This simply points Jina to our file and Executor class. Now we can run the command:
+This simply points Jina-serve to our file and Executor class. Now we can run the command:
 
 ```bash
 jina executor --uses my-exec.yml --port 12345
@@ -222,7 +222,7 @@ Unlike the `jina executor` CLI, this command supports replication and sharding.
 
 Read more about the {ref}`YAML specifications of Deployments <deployment-yaml-spec>`.
 ## Serve via Kubernetes
-You can generate Kubernetes configuration files for your containerized Executor by using the {meth}`~jina.Deployment.to_kubernetes_yaml()` method:
+You can generate Kubernetes configuration files for your containerized Executor by using the {meth}`~jina-serve.Deployment.to_kubernetes_yaml()` method:
 
 ```python
 from jina import Deployment
@@ -263,7 +263,7 @@ Let's export the external IP address created and use it to send requests to the 
 export EXTERNAL_IP=`kubectl get service executor-exposed -n my-namespace -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'`
 ```
 
-Then, we can send requests using {meth}`~jina.Client`. Since Kubernetes load balancers cannot load balance streaming 
+Then, we can send requests using {meth}`~jina-serve.Client`. Since Kubernetes load balancers cannot load balance streaming 
 gRPC requests, it is recommended to set `stream=False` when using gRPC (note that this is only applicable for Kubernetes deployments of Executors):
 ```python
 import os
@@ -296,12 +296,12 @@ This type of standalone Executor can be either *external* or *shared*. By defaul
 - An external Executor is deployed alongside a {ref}`Gateway <architecture-overview>`. 
 - A shared Executor has no Gateway.
 
-Although both types can join a {class}`~jina.Flow`, use a shared Executor if the Executor is only intended to join Flows 
+Although both types can join a {class}`~jina-serve.Flow`, use a shared Executor if the Executor is only intended to join Flows 
 to have less network hops and save the costs of running the Gateway in Kubernetes.
 
 ## Serve via Docker Compose
 
-You can generate a Docker Compose service file for your containerized Executor with the static {meth}`~jina.Deployment.to_docker_compose_yaml` method.
+You can generate a Docker Compose service file for your containerized Executor with the static {meth}`~jina-serve.Deployment.to_docker_compose_yaml` method.
 
 ```python
 from jina import Deployment

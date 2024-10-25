@@ -66,7 +66,7 @@ with Flow(port=1234, protocol='grpc') as f:
 The Client has to specify the followings parameters to match the Flow and how it was set up:
 * the `protocol` it needs to use to communicate with the Flow
 * the `host` and the `port` as exposed by the Flow
-* if it needs to use `TLS` encryption (to connect to a {class}`~jina.Flow` that has been {ref}`configured to use TLS <flow-tls>` in combination with gRPC, http, or websocket)
+* if it needs to use `TLS` encryption (to connect to a {class}`~jina-serve.Flow` that has been {ref}`configured to use TLS <flow-tls>` in combination with gRPC, http, or websocket)
 
     
 ````{Hint} Default port
@@ -186,7 +186,7 @@ c.post(
 (client-compress)=
 ## Enable compression
 
-If the communication to the Gateway is via gRPC, you can pass `compression` parameter to  {meth}`~jina.clients.mixin.PostMixin.post` to benefit from [gRPC compression](https://grpc.github.io/grpc/python/grpc.html#compression) methods. 
+If the communication to the Gateway is via gRPC, you can pass `compression` parameter to  {meth}`~jina-serve.clients.mixin.PostMixin.post` to benefit from [gRPC compression](https://grpc.github.io/grpc/python/grpc.html#compression) methods. 
 
 The supported choices are: None, `gzip` and `deflate`.
 
@@ -212,7 +212,7 @@ One can also specify the compression of the internal communication {ref}`as desc
 
 ## Simple profiling of the latency
 
-Before sending any real data, you can test the connectivity and network latency by calling the {meth}`~jina.clients.mixin.ProfileMixin.profiling` method:
+Before sending any real data, you can test the connectivity and network latency by calling the {meth}`~jina-serve.clients.mixin.ProfileMixin.profiling` method:
 
 ```python
 from jina import Client
