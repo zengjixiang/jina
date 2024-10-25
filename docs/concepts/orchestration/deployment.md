@@ -270,7 +270,7 @@ In this case, the Deployment can be stopped by interrupting the thread or proces
 Alternatively, a `multiprocessing` or `threading` `Event` object can be passed to `.block()`, which stops the Deployment once set.
 
 ```python
-from jina-serve import Deployment
+from jina import Deployment
 import threading
 
 
@@ -301,7 +301,7 @@ A Deployment YAML can be exported as a Docker Compose YAML or Kubernetes YAML bu
 
 ````{tab} Python
 ```python
-from jina-serve import Deployment
+from jina import Deployment
 
 dep = Deployment()
 dep.to_docker_compose_yaml()
@@ -322,7 +322,7 @@ For advanced utilization of Docker Compose with Jina-serve, refer to {ref}`How t
 
 ````{tab} Python
 ```python
-from jina-serve import Deployment
+from jina import Deployment
 
 dep = Deployment
 dep.to_kubernetes_yaml('dep_k8s_configuration')
@@ -381,7 +381,7 @@ The logging configuration can be used as follows:
 
 ````{tab} Python
 ```python
-from jina-serve import Deployment
+from jina import Deployment
 
 dep = Deployment(log_config='./logging.json.yml')
 ```
@@ -408,7 +408,7 @@ gRPC is the default protocol used by a Deployment to expose Executors to the out
 HTTP can be used for a stand-alone Deployment (without being part of a Flow), which allows external services to connect via REST. 
 
 ```python
-from jina-serve import Deployment, Executor, requests
+from jina import Deployment, Executor, requests
 from docarray import DocList
 from docarray.documents import TextDoc
  

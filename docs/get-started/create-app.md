@@ -141,7 +141,7 @@ emphasize-lines: 13-16
 import numpy as np
 import torch
 
-from jina-serve import Executor, requests
+from jina import Executor, requests
 
 
 class MyExecutor(Executor):
@@ -163,7 +163,7 @@ Kill the last server with `Ctrl-C` and restart the server with `jina flow --uses
 Modify `client.py` to call the `/crunch-numbers` endpoint:
 
 ```python
-from jina-serve import Client
+from jina import Client
 from docarray import DocList
 from docarray.documents.legacy import LegacyDocument
 
@@ -245,7 +245,7 @@ Now change the Client's code to use the deployed endpoint shown above:
 ---
 emphasize-lines: 6
 ---
-from jina-serve import Client
+from jina import Client
 from docarray import DocList
 from docarray.documents.legacy import LegacyDocument
 

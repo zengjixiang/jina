@@ -19,7 +19,7 @@ from jina import requests
 {class}`~jina.requests` takes an optional `on=` parameter, which binds the decorated method to the specified route:
 
 ```python
-from jina-serve import Executor, requests
+from jina import Executor, requests
 import asyncio
 
 

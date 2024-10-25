@@ -434,7 +434,7 @@ More Flow YAML specifications can be found in {ref}`Flow YAML Specification<flow
 Let's understand how Executors process Documents's inside a Flow, and how changes are chained and applied, affecting downstream Executors in the Flow.
 
 ```python 
-from jina-serve import Executor, requests, Flow
+from jina import Executor, requests, Flow
 from docarray import DocList, BaseDoc
 from docarray.documents import TextDoc
 

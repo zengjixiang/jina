@@ -37,7 +37,7 @@ MyExecutor/
 
 - `executor.py` contains your Executor's main logic. The command should generate the following boilerplate code:
 ```python
-from jina-serve import Executor, requests
+from jina import Executor, requests
 from docarray import DocList, BaseDoc
 
 class MyExecutor(Executor):
@@ -60,7 +60,7 @@ If your Executor has `__init__`, it needs to carry `**kwargs` in the signature a
 in the body:
 
 ```python
-from jina-serve import Executor
+from jina import Executor
 
 
 class MyExecutor(Executor):

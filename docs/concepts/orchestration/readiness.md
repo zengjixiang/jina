@@ -95,7 +95,7 @@ True
 
 `````{tab} Deployment
 ```python
-from jina-serve import Deployment
+from jina import Deployment
 
 dep = Deployment(port=12345)
 
@@ -156,7 +156,7 @@ WARNI… Jina-serve@92986 message lost 100% (3/3)
 `````
 `````{tab} Flow
 ```python
-from jina-serve import Flow
+from jina import Flow
 
 f = Flow(port=12345)
 
