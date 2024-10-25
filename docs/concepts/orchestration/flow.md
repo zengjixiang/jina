@@ -303,7 +303,7 @@ Please follow the walkthrough and enjoy the free GPU/TPU!
 
 
 ```{tip}
-Hosing services on Google Colab is not recommended if your server aims to be long-lived or permanent. It is often used for quick experiments, demonstrations or leveraging its free GPU/TPU. For stable, secure and free hosting of your Flow, check out [JCloud](https://docs.jina.ai/concepts/jcloud/).
+Hosing services on Google Colab is not recommended if your server aims to be long-lived or permanent. It is often used for quick experiments, demonstrations or leveraging its free GPU/TPU. For stable, secure and free hosting of your Flow, check out [JCloud](https://jina.ai/serve/concepts/jcloud/).
 ```
 
 ## Export

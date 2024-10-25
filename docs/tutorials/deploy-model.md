@@ -42,7 +42,7 @@ When you build a model or service in Jina-serve, it's always in the form of an E
 
 In this example we need to install:
 
-- The [Jina-serve framework](https://docs.jina.ai/) itself
+- The [Jina-serve framework](https://jina.ai/serve/) itself
 - The dependencies of the specific model we want to serve and deploy
 
 ```shell

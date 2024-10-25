@@ -8,7 +8,7 @@
 configuration
 ```
 
-```{figure} https://docs.jina.ai/_images/jcloud-banner.png
+```{figure} https://jina.ai/serve/_images/jcloud-banner.png
 :width: 0 %
 :scale: 0 %
 ```
@@ -50,13 +50,13 @@ For the rest of this section, we use `jc` or `jcloud`. But again they are interc
 
 ### Deploy
 
-In Jina's idiom, a project is a [Flow](https://docs.jina.ai/concepts/orchestration/flow/), which represents an end-to-end task such as indexing, searching or recommending. In this document, we use "project" and "Flow" interchangeably.
+In Jina's idiom, a project is a [Flow](https://jina.ai/serve/concepts/orchestration/flow/), which represents an end-to-end task such as indexing, searching or recommending. In this document, we use "project" and "Flow" interchangeably.
 
 A Flow can have two types of file structure: a single YAML file or a project folder.
 
 #### Single YAML file
 
-A self-contained YAML file, consisting of all configuration at the [Flow](https://docs.jina.ai/concepts/orchestration/flow/)-level and [Executor](https://docs.jina.ai/concepts/serving/executor/)-level.
+A self-contained YAML file, consisting of all configuration at the [Flow](https://jina.ai/serve/concepts/orchestration/flow/)-level and [Executor](https://jina.ai/serve/concepts/serving/executor/)-level.
 
 > All Executors' `uses` must follow the format `jinaai+docker://<username>/MyExecutor` (from [Executor Hub](https://cloud.jina.ai)) to avoid any local file dependencies:
 
@@ -123,7 +123,7 @@ hello/
 Where:
 
 - `hello/` is your top-level project folder.
-- `executor1` directory has all Executor related code/configuration. You can read the best practices for [file structures](https://docs.jina.ai/concepts/serving/executor/file-structure/). Multiple Executor directories can be created.
+- `executor1` directory has all Executor related code/configuration. You can read the best practices for [file structures](https://jina.ai/serve/concepts/serving/executor/file-structure/). Multiple Executor directories can be created.
 - `flow.yml` Your Flow YAML.
 - `.env` All environment variables used during deployment.
 
@@ -374,7 +374,7 @@ jc secret create mysecret rich-husky-af14064067 --from-literal "{'env-name': 'se
 ```
 
 ```{tip}
-You can optionally pass the `--update` flag to automatically update the Flow spec with the updated secret information. This flag will update the Flow which is hosted on the cloud. Finally, you can also optionally pass a Flow's yaml file path with `--path` to update the yaml file locally.  Refer to [this](https://docs.jina.ai/cloud-nativeness/kubernetes/#deploy-flow-with-custom-environment-variables-and-secrets) section for more information.
+You can optionally pass the `--update` flag to automatically update the Flow spec with the updated secret information. This flag will update the Flow which is hosted on the cloud. Finally, you can also optionally pass a Flow's yaml file path with `--path` to update the yaml file locally.  Refer to [this](https://jina.ai/serve/cloud-nativeness/kubernetes/#deploy-flow-with-custom-environment-variables-and-secrets) section for more information.
 ```
 
 ```{caution}
@@ -419,7 +419,7 @@ jc secret update rich-husky-af14064067 mysecret --from-literal "{'env-name': 'se
 ```
 
 ```{tip}
-You can optionally pass the `--update` flag to automatically update the Flow spec with the updated secret information. This flag will update the Flow which is hosted on the cloud. Finally, you can also optionally pass a Flow's yaml file path with `--path` to update the yaml file locally. Refer to [this](https://docs.jina.ai/cloud-nativeness/kubernetes/#deploy-flow-with-custom-environment-variables-and-secrets) section for more information.
+You can optionally pass the `--update` flag to automatically update the Flow spec with the updated secret information. This flag will update the Flow which is hosted on the cloud. Finally, you can also optionally pass a Flow's yaml file path with `--path` to update the yaml file locally. Refer to [this](https://jina.ai/serve/cloud-nativeness/kubernetes/#deploy-flow-with-custom-environment-variables-and-secrets) section for more information.
 ```
 
 ```{caution}
@@ -498,7 +498,7 @@ jcloud:
 
 #### Single YAML file
 
-A self-contained YAML file, consisting of all configuration information at the [Deployment](https://docs.jina.ai/concepts/orchestration/deployment/)-level and [Executor](https://docs.jina.ai/concepts/serving/executor/)-level.
+A self-contained YAML file, consisting of all configuration information at the [Deployment](https://jina.ai/serve/concepts/orchestration/deployment/)-level and [Executor](https://jina.ai/serve/concepts/serving/executor/)-level.
 
 > A Deployment's `uses` parameter must follow the format `jinaai+docker://<username>/MyExecutor` (from [Executor Hub](https://cloud.jina.ai)) to avoid any local file dependencies:
 

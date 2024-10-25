@@ -32,7 +32,7 @@ Key advantages over FastAPI:
 pip install jina
 ```
 
-See guides for [Apple Silicon](https://docs.jina.ai/get-started/install/apple-silicon-m1-m2/) and [Windows](https://docs.jina.ai/get-started/install/windows/).
+See guides for [Apple Silicon](https://jina.ai/serve/get-started/install/apple-silicon-m1-m2/) and [Windows](https://jina.ai/serve/get-started/install/windows/).
 
 ## Core Concepts
 
@@ -50,28 +50,31 @@ from jina import Executor, requests
 from docarray import DocList, BaseDoc
 from transformers import pipeline
 
+
 class Prompt(BaseDoc):
-   text: str
+    text: str
+
 
 class Generation(BaseDoc):
-   prompt: str
-   text: str
+    prompt: str
+    text: str
+
 
 class StableLM(Executor):
-   def __init__(self, **kwargs):
-       super().__init__(**kwargs)
-       self.generator = pipeline(
-           'text-generation', model='stabilityai/stablelm-base-alpha-3b'
-       )
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.generator = pipeline(
+            'text-generation', model='stabilityai/stablelm-base-alpha-3b'
+        )
 
-   @requests
-   def generate(self, docs: DocList[Prompt], **kwargs) -> DocList[Generation]:
-       generations = DocList[Generation]()
-       prompts = docs.text
-       llm_outputs = self.generator(prompts)
-       for prompt, output in zip(prompts, llm_outputs):
-           generations.append(Generation(prompt=prompt, text=output))
-       return generations
+    @requests
+    def generate(self, docs: DocList[Prompt], **kwargs) -> DocList[Generation]:
+        generations = DocList[Generation]()
+        prompts = docs.text
+        llm_outputs = self.generator(prompts)
+        for prompt, output in zip(prompts, llm_outputs):
+            generations.append(Generation(prompt=prompt, text=output))
+        return generations
 ```
 
 Deploy with Python or YAML:
@@ -83,7 +86,7 @@ from executor import StableLM
 dep = Deployment(uses=StableLM, timeout_ready=-1, port=12345)
 
 with dep:
-   dep.block()
+    dep.block()
 ```
 
 ```yaml
@@ -115,14 +118,10 @@ Chain services into a Flow:
 ```python
 from jina import Flow
 
-flow = (
-   Flow(port=12345)
-   .add(uses=StableLM)
-   .add(uses=TextToImage)
-)
+flow = Flow(port=12345).add(uses=StableLM).add(uses=TextToImage)
 
 with flow:
-   flow.block()
+    flow.block()
 ```
 
 ## Scaling and Deployment
@@ -207,62 +206,66 @@ Enable token-by-token streaming for responsive LLM applications:
 ```python
 from docarray import BaseDoc
 
+
 class PromptDocument(BaseDoc):
-   prompt: str
-   max_tokens: int
+    prompt: str
+    max_tokens: int
+
 
 class ModelOutputDocument(BaseDoc):
-   token_id: int
-   generated_text: str
+    token_id: int
+    generated_text: str
 ```
 
 2. Initialize service:
 ```python
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
+
 class TokenStreamingExecutor(Executor):
-   def __init__(self, **kwargs):
-       super().__init__(**kwargs)
-       self.model = GPT2LMHeadModel.from_pretrained('gpt2')
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.model = GPT2LMHeadModel.from_pretrained('gpt2')
 ```
 
 3. Implement streaming:
 ```python
 @requests(on='/stream')
 async def task(self, doc: PromptDocument, **kwargs) -> ModelOutputDocument:
-   input = tokenizer(doc.prompt, return_tensors='pt')
-   input_len = input['input_ids'].shape[1]
-   for _ in range(doc.max_tokens):
-       output = self.model.generate(**input, max_new_tokens=1)
-       if output[0][-1] == tokenizer.eos_token_id:
-           break
-       yield ModelOutputDocument(
-           token_id=output[0][-1],
-           generated_text=tokenizer.decode(
-               output[0][input_len:], skip_special_tokens=True
-           ),
-       )
-       input = {
-           'input_ids': output,
-           'attention_mask': torch.ones(1, len(output[0])),
-       }
+    input = tokenizer(doc.prompt, return_tensors='pt')
+    input_len = input['input_ids'].shape[1]
+    for _ in range(doc.max_tokens):
+        output = self.model.generate(**input, max_new_tokens=1)
+        if output[0][-1] == tokenizer.eos_token_id:
+            break
+        yield ModelOutputDocument(
+            token_id=output[0][-1],
+            generated_text=tokenizer.decode(
+                output[0][input_len:], skip_special_tokens=True
+            ),
+        )
+        input = {
+            'input_ids': output,
+            'attention_mask': torch.ones(1, len(output[0])),
+        }
 ```
 
 4. Serve and use:
 ```python
 # Server
 with Deployment(uses=TokenStreamingExecutor, port=12345, protocol='grpc') as dep:
-   dep.block()
+    dep.block()
+
 
 # Client
 async def main():
-   client = Client(port=12345, protocol='grpc', asyncio=True)
-   async for doc in client.stream_doc(
-       on='/stream',
-       inputs=PromptDocument(prompt='what is the capital of France ?', max_tokens=10),
-       return_type=ModelOutputDocument,
-   ):
-       print(doc.generated_text)
+    client = Client(port=12345, protocol='grpc', asyncio=True)
+    async for doc in client.stream_doc(
+        on='/stream',
+        inputs=PromptDocument(prompt='what is the capital of France ?', max_tokens=10),
+        return_type=ModelOutputDocument,
+    ):
+        print(doc.generated_text)
 ```
 
 ## Support
