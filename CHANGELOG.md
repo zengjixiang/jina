@@ -291,6 +291,7 @@
 
 
 
+
 # Change Logs
 
 Jina is released on every Friday evening. The PyPi package and Docker Image will be updated, the changes of the release will be tracked by this file.
@@ -17125,4 +17126,24 @@ Jina is released on every Friday evening. The PyPi package and Docker Image will
  - [[```984da92d```](https://github.com/jina-ai/jina/commit/984da92d126471a107e82fb0d77950696420be10)] __-__ update readme (*Han Xiao*)
  - [[```32f0cb30```](https://github.com/jina-ai/jina/commit/32f0cb30dbd019cb60f24754befdfb30d2410e4a)] __-__ __docs__: update TOC (*Jina Dev Bot*)
  - [[```1e3dd5f2```](https://github.com/jina-ai/jina/commit/1e3dd5f29b6c88548cd44a1be51d3226523cf81a)] __-__ __version__: the next version will be 3.27.18 (*Jina Dev Bot*)
+
+<a name=release-note-3-27-19></a>
+## Release Note (`3.27.19`)
+
+> Release time: 2024-11-04 10:18:08
+
+
+
+🙇 We'd like to thank all contributors for this new release! In particular,
+ Zac Li,  Jina Dev Bot,  🙇
+
+
+### 🆕 New Features
+
+ - [[```92d03f08```](https://github.com/jina-ai/jina/commit/92d03f08a3ae9ff02de207418cb4cde4d9fb93a2)] __-__ fix batch handling in sagemaker for clip (#6216) (*Zac Li*)
+
+### 🍹 Other Improvements
+
+ - [[```2f65ce10```](https://github.com/jina-ai/jina/commit/2f65ce1074aeff7fd6b77c8b9cd2a0eca7e0dcbd)] __-__ __docs__: update TOC (*Jina Dev Bot*)
+ - [[```8aee3a1d```](https://github.com/jina-ai/jina/commit/8aee3a1d9dc7842425163ba36f82cb0e7f09c851)] __-__ __version__: the next version will be 3.27.19 (*Jina Dev Bot*)
 
