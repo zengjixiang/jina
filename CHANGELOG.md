@@ -292,6 +292,7 @@
 
 
 
+
 # Change Logs
 
 Jina is released on every Friday evening. The PyPi package and Docker Image will be updated, the changes of the release will be tracked by this file.
@@ -17147,4 +17148,25 @@ Jina is released on every Friday evening. The PyPi package and Docker Image will
 
  - [[```2f65ce10```](https://github.com/jina-ai/jina/commit/2f65ce1074aeff7fd6b77c8b9cd2a0eca7e0dcbd)] __-__ __docs__: update TOC (*Jina Dev Bot*)
  - [[```8aee3a1d```](https://github.com/jina-ai/jina/commit/8aee3a1d9dc7842425163ba36f82cb0e7f09c851)] __-__ __version__: the next version will be 3.27.19 (*Jina Dev Bot*)
+
+<a name=release-note-3-27-20></a>
+## Release Note (`3.27.20`)
+
+> Release time: 2024-11-05 09:18:22
+
+
+
+🙇 We'd like to thank all contributors for this new release! In particular,
+ Joan Fontanals,  Jina Dev Bot,  🙇
+
+
+### 🐞 Bug fixes
+
+ - [[```a51e5eec```](https://github.com/jina-ai/jina/commit/a51e5eec4df0b80dee13fcd89044be1b42ed5c40)] __-__ fix req handling sagemaker (#6218) (*Joan Fontanals*)
+ - [[```0337bc47```](https://github.com/jina-ai/jina/commit/0337bc47b4beaf1c3ab5639bf55c88dd7c80ae7b)] __-__ test hubapp hubpods fix (#6217) (*Joan Fontanals*)
+
+### 🍹 Other Improvements
+
+ - [[```425e5ea6```](https://github.com/jina-ai/jina/commit/425e5ea6a0f687f78d27b95e2f107c3319f499d2)] __-__ __docs__: update TOC (*Jina Dev Bot*)
+ - [[```6ddc3406```](https://github.com/jina-ai/jina/commit/6ddc34062c9a87075010c13136b1ba7f4902e666)] __-__ __version__: the next version will be 3.27.20 (*Jina Dev Bot*)
 
