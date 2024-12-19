@@ -49,12 +49,6 @@ jobs:
 
           # MacOS emulated
           - os: macos-latest
-            python: '3.8'
-            python-cibuildwheels: '38'
-            platform_id: macosx_x86_64
-            arch: x86_64
-            goarch: amd64
-          - os: macos-latest
             python: '3.9'
             python-cibuildwheels: '39'
             platform_id: macosx_x86_64
