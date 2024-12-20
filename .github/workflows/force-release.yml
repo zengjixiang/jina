@@ -69,12 +69,6 @@ jobs:
 
           # MacOS native
           - os: macos-latest
-            python: '3.8'
-            python-cibuildwheels: '38'
-            platform_id: macosx_arm64
-            arch: arm64
-            goarch: arm64
-          - os: macos-latest
             python: '3.9'
             python-cibuildwheels: '39'
             platform_id: macosx_arm64
